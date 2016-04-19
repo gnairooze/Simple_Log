@@ -11,13 +11,14 @@ namespace TestLog
     {
         static void Main(string[] args)
         {
-            DoTest1();
+            DoTest1ConsoleLog();
+            DoTest2DBLog();
 
             Console.WriteLine("Press anykey to exit ...");
             Console.Read();
         }
 
-        private static void DoTest1()
+        private static void DoTest1ConsoleLog()
         {
             var s1 = System.Diagnostics.Stopwatch.StartNew();
             s1.Start();
@@ -27,6 +28,34 @@ namespace TestLog
             SimpleLog.Manager logManager = new SimpleLog.Manager(SimpleLog.Constants.LOG_CONSOLE);
 
             SimpleLog.Message message = new SimpleLog.Message() {
+                CreatedOn = DateTime.UtcNow,
+                Data = "Sample data to log",
+                Group = "Group A",
+                IdentifierName = "User_ID",
+                IdentifierValue = "User-1",
+                Operation = "Edit User",
+                Owner = "AppUser"
+            };
+
+            logManager.Add(message);
+
+            Console.WriteLine(JsonConvert.SerializeObject(message));
+            s1.Stop();
+
+            Console.WriteLine("Completed executing {0} in {1} milliseconds", methodName, s1.ElapsedMilliseconds);
+        }
+
+        private static void DoTest2DBLog()
+        {
+            var s1 = System.Diagnostics.Stopwatch.StartNew();
+            s1.Start();
+            string methodName = System.Reflection.MethodInfo.GetCurrentMethod().Name;
+            Console.WriteLine("Start executing {0} ...", methodName);
+
+            SimpleLog.Manager logManager = new SimpleLog.Manager(SimpleLog.Constants.LOG_DB);
+
+            SimpleLog.Message message = new SimpleLog.Message()
+            {
                 CreatedOn = DateTime.UtcNow,
                 Data = "Sample data to log",
                 Group = "Group A",
