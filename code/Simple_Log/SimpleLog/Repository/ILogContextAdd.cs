@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace SimpleLog.Repository
 {
-    internal interface ILogContext
+    internal interface ILogContextAdd
     {
         void Add(Message message);
-        void Delete(Message message);
-        IEnumerable<Message> Read(Search search);
     }
 }

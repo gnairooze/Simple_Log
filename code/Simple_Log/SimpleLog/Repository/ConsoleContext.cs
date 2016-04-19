@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SimpleLog.Repository
 {
-    internal class ConsoleContext : ILogContext
+    internal class ConsoleContext : ILogContextManage
     {
         private List<Message> _Messages = new List<Message>();
 

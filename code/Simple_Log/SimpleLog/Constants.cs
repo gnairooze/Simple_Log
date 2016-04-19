@@ -11,6 +11,7 @@ namespace SimpleLog
         #region contexts
         public const string LOG_DB = "Log DB Context";
         public const string LOG_CONSOLE = "Log Console Context";
+        public const string LOG_TEXT_FILE = "Log Text File Context";
         #endregion
     }
 }

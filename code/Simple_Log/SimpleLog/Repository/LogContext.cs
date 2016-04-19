@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SimpleLog.Repository
 {
-    internal class LogContext:DbContext,ILogContext 
+    internal class LogContext:DbContext,ILogContextManage
     {
         public DbSet<Message> Messages { get; set; }
 

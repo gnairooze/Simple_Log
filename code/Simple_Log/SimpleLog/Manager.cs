@@ -8,28 +8,42 @@ namespace SimpleLog
 {
     public class Manager
     {
-        private SimpleLog.Repository.ILogContext _Context;
+        private object _Context;
 
         #region constructors
-        public Manager(string context, int count = 50)
+        public Manager(string context, int count = 50, string filename = "")
         {
-            this._Context = SimpleLog.Repository.LogFactory.GetLogContext(context, count);
+            this._Context = SimpleLog.Repository.LogFactory.GetLogContext(context, count, filename);
         }
         #endregion
 
         public void Add(Message message)
         {
-            this._Context.Add(message);
+            (this._Context as SimpleLog.Repository.ILogContextAdd).Add(message);
         }
 
         public void Delete(Message message)
         {
-            this._Context.Delete(message);
+            if(this._Context is SimpleLog.Repository.ILogContextManage)
+            {
+                (this._Context as SimpleLog.Repository.ILogContextManage).Delete(message);
+            }
+            else
+            {
+                throw new InvalidCastException("the context cannot delete message.");
+            }
         }
 
         public IEnumerable<Message> Read(Search search)
         {
-            return this._Context.Read(search);
+            if (this._Context is SimpleLog.Repository.ILogContextManage)
+            {
+                return (this._Context as SimpleLog.Repository.ILogContextManage).Read(search);
+            }
+            else
+            {
+                throw new InvalidCastException("the context cannot read messages.");
+            }
         }
     }
 }

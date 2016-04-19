@@ -50,14 +50,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="Repository\ConsoleContext.cs" />
+    <Compile Include="Repository\ILogContextAdd.cs" />
     <Compile Include="Repository\LogContext.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\ILogContext.cs" />
+    <Compile Include="Repository\ILogContextManage.cs" />
     <Compile Include="Repository\LogFactory.cs" />
+    <Compile Include="Repository\TextFileContext.cs" />
     <Compile Include="Search.cs" />
   </ItemGroup>
   <ItemGroup>

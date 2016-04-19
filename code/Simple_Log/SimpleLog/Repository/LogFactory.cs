@@ -8,7 +8,7 @@ namespace SimpleLog.Repository
 {
    internal  class LogFactory
     {
-        public static ILogContext GetLogContext(string context, int count = 50)
+        public static object GetLogContext(string context, int count, string filename)
         {
             switch (context)
             {
@@ -16,6 +16,8 @@ namespace SimpleLog.Repository
                     return new ConsoleContext(count);
                 case SimpleLog.Constants.LOG_DB:
                     return new LogContext();
+                case SimpleLog.Constants.LOG_TEXT_FILE:
+                    return new TextFileContext(filename);
                 default:
                     return new LogContext();
             }
