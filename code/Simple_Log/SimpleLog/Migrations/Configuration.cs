@@ -5,14 +5,14 @@ namespace SimpleLog.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<SimpleLog.Repository.LogContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<SimpleLog.Repository.LogDBContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(SimpleLog.Repository.LogContext context)
+        protected override void Seed(SimpleLog.Repository.LogDBContext context)
         {
             //  This method will be called after migrating to the latest version.
 

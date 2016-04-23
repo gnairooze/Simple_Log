@@ -8,6 +8,10 @@ namespace SimpleLog.Repository
 {
     internal interface ILogContextAdd
     {
+        bool CanAddError { get; set; }
+        bool CanAddWarning { get; set; }
+        bool CanAddInfo { get; set; }
+
         void Add(Message message);
     }
 }

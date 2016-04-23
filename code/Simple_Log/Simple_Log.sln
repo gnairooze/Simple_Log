@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleLog", "SimpleLog\Simp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLog", "TestLog\TestLog.csproj", "{CF4C4811-6661-4AFE-887A-18C9DECBEACC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SetupDB", "SetupDB", "{2AEF9C8C-63A7-43B5-B613-00DFDDF0B939}"
+	ProjectSection(SolutionItems) = preProject
+		SetupDB\CreateScheme.sql = SetupDB\CreateScheme.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

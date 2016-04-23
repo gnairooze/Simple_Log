@@ -13,6 +13,10 @@ namespace SimpleLog
         [Key]
         public long ID { get; set; }
         [Required]
+        [MaxLength(10)]
+        [Index]
+        public string MessageType { get; set; }      
+        [Required]
         [MaxLength(400)]
         [Index]
         public string Owner { get; set; }

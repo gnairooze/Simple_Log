@@ -13,5 +13,11 @@ namespace SimpleLog
         public const string LOG_CONSOLE = "Log Console Context";
         public const string LOG_TEXT_FILE = "Log Text File Context";
         #endregion
+
+        #region message types
+        public const string MESSAGE_TYPE_ERROR = "error";
+        public const string MESSAGE_TYPE_WARNING = "warning";
+        public const string MESSAGE_TYPE_INFO = "info";
+        #endregion
     }
 }

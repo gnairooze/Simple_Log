@@ -8,42 +8,62 @@ namespace SimpleLog
 {
     public class Manager
     {
-        private object _Context;
+        private List<object> _Contexts = new List<object>();
 
         #region constructors
-        public Manager(string context, int count = 50, string filename = "")
+        public Manager():this(Constants.LOG_CONSOLE, null)
         {
-            this._Context = SimpleLog.Repository.LogFactory.GetLogContext(context, count, filename);
+            
+        }
+
+        public Manager(string context) : this(context, null)
+        {
+
+        }
+
+        public Manager(string context, dynamic settings)
+        {
+            this._Contexts.Add(SimpleLog.Repository.LogFactory.GetLogContext(context, settings));
         }
         #endregion
 
+        public void AddContext(string context, dynamic settings)
+        {
+            this._Contexts.Add(SimpleLog.Repository.LogFactory.GetLogContext(context, settings));
+        }
+
         public void Add(Message message)
         {
-            (this._Context as SimpleLog.Repository.ILogContextAdd).Add(message);
+            foreach (var context in this._Contexts)
+            {
+                if (context is SimpleLog.Repository.ILogContextAdd)
+                {
+                    (context as SimpleLog.Repository.ILogContextAdd).Add(message);
+                }
+            }
         }
 
         public void Delete(Message message)
         {
-            if(this._Context is SimpleLog.Repository.ILogContextManage)
+            foreach (var context in this._Contexts)
             {
-                (this._Context as SimpleLog.Repository.ILogContextManage).Delete(message);
-            }
-            else
-            {
-                throw new InvalidCastException("the context cannot delete message.");
+                if (context is SimpleLog.Repository.ILogContextDelete)
+                {
+                    (context as SimpleLog.Repository.ILogContextDelete).Delete(message);
+                }
             }
         }
 
-        public IEnumerable<Message> Read(Search search)
+        public IEnumerable<Message> Read(string context, Search search)
         {
-            if (this._Context is SimpleLog.Repository.ILogContextManage)
+            foreach (var item in this._Contexts)
             {
-                return (this._Context as SimpleLog.Repository.ILogContextManage).Read(search);
+                if (item is SimpleLog.Repository.ILogContextRead && (item as SimpleLog.Repository.ILogContextRead).ContextName == context)
+                {
+                    return (item as SimpleLog.Repository.ILogContextRead).Read(search);
+                }
             }
-            else
-            {
-                throw new InvalidCastException("the context cannot read messages.");
-            }
+            return null;
         }
     }
 }
