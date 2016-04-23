@@ -19,4 +19,4 @@ Change Database from localdb to SqlServer
 1. in web.config (the configuration file related to the application), entityFramework/defaultConnectionFactory/ 
 2. change the type property to be “System.Data.Entity.Infrastructure.SqlConnectionFactory, EntityFramework”
 3. in entityFramework/defaultConnectionFactory/parameters/parameter/ 
-4. change the value property to contain the connection string, for example  (Data Source=.; Integrated Security=True; MultipleActiveResultSets=True)
+4. change the value property to contain the connection string, for example  (Data Source=.; Initial Catalog=MyDB Integrated Security=True; MultipleActiveResultSets=True)
